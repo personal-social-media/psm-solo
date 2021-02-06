@@ -40,12 +40,7 @@ postgres:
   environment:
     - POSTGRES_PASSWORD=1234
 
-caddy:
-  image: caddy:2-alpine
-  ports:
-    - "80:80"
-    - "443:443"
+nginx:
+  image: nginx:stable-alpine
   volumes:
-    - .build/caddy/Caddyfile:/etc/caddy/Caddyfile
-    - .build/sockets:/sockets
-    - ./app:/app
+    - .build/nginx/sites-enabled:/etc/nginx/sites-enabled
