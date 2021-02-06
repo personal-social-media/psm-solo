@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    total (0.3.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  total (~> 0.3.0)
+
+BUNDLED WITH
+   2.2.8

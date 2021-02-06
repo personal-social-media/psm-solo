@@ -1,0 +1,8 @@
+localhost
+root * /app/public
+
+@notStatic {
+	not file
+}
+reverse_proxy @notStatic unix//sockets/puma.sock
+file_server

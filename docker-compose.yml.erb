@@ -1,0 +1,41 @@
+default_rails: &default_rails
+  build: "./.build/docker/app"
+  links:
+    - redis
+    - postgres
+  volumes:
+    - ./app:/app
+    - .build/.bundle-cache-dir/app:/usr/local/bundle/
+    - .build/sockets:/sockets
+    - .build/keys:/keys
+    - .build/storage:/storage
+  environment:
+    - DOCKER=true
+    - RUBYOPT=-W:no-deprecated -W:no-experimental
+    - REDIS_URL=redis://redis:6379/4
+    - RAILS_ENV=production
+    - SECRET_KEY_BASE=<%= @secret_key_base %>
+    - LOAD_BALANCER_ADDRESS=<%= @load_balancer_ip %>
+    - TIME_ZONE=UTC
+    - DATABASE_URL=postgres://postgres:1234@postgres/psm
+    - LOGIN_TOKEN=<%= @login_token %>
+    - STORAGE=/storage
+    - KEYS_LOCATION=/keys
+
+app:
+  <<: *default_rails
+  command: bundle exec puma -b unix:///sockets/puma.sock
+
+sidekiq:
+  <<: *default_rails
+  command: bundle exec sidekiq
+
+redis:
+  image: redis:alpine
+
+postgres:
+  image: postgres:12-alpine
+  volumes:
+    - .build/.db:/var/lib/postgresql/data
+  environment:
+    - POSTGRES_PASSWORD=1234
