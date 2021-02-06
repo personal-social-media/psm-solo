@@ -7,15 +7,12 @@ class Repo < Thor
       run "git clone https://github.com/personal-social-media/personal-social-media.git #{release_id} --depth 1"
     end
 
-    run "ln -s .build/releases app"
+    run "ln -s .build/releases/#{release_id} app"
   end
 
-  desc "update", "updates the app"
-  def update
-    inside "./app" do
-      run "git checkout Gemfile.lock"
-      run "git pull origin master"
-    end
+  desc "finish-deploy", "ln -s the new deploy"
+  def finish_deploy
+    run "ln -s .build/releases/#{release_id} app"
   end
 
   no_commands do

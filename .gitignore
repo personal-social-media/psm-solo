@@ -1,8 +1,9 @@
 .idea/
-app/
+app
 .build/.db
 .build/keys
 .build/.bundle-cache-dir
 .build/sockets
 .build/storage
 docker-compose.yml
+.build/releases
