@@ -30,8 +30,10 @@ class Setup < Thor
     sample = File.read("docker-compose.yml.erb")
     erb = ERB.new(sample)
     @load_balancer_ip = ask("Type the server IP:\n").strip
+    @@load_balancer_ip = @load_balancer_ip
     @pg_password = SecureRandom.hex
     @login_token = SecureRandom.hex 32
+    @@login_token = @login_token
     @secret_key_base = SecureRandom.hex 32
 
     yml = erb.result(binding)
@@ -47,7 +49,7 @@ class Setup < Thor
 
   no_commands do
     def login_url
-      print "Setup done\nNow go to\n\n https://#{@load_balancer_ip}/session/register?login_token=#{@login_token}\n"
+      print "Setup done\nNow go to\n\n https://#{@@load_balancer_ip}/session/register?login_token=#{@@login_token}\n"
     end
   end
 end

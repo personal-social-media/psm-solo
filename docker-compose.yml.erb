@@ -39,3 +39,13 @@ postgres:
     - .build/.db:/var/lib/postgresql/data
   environment:
     - POSTGRES_PASSWORD=1234
+
+caddy:
+  image: caddy:2-alpine
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - .build/caddy/Caddyfile:/etc/caddy/Caddyfile
+    - .build/sockets:/sockets
+    - ./app:/app
