@@ -13,10 +13,9 @@ class Master < Thor
     if ask("Type yes/no if you want to remove existing nginx / apache").match /yes/i
       s.invoke(:remove_default_servers)
     end
+    repo.invoke(:clone)
     s.invoke(:docker_compose)
     docker.invoke(:build)
-    repo.invoke(:clone)
-    repo.invoke(:finish_deploy)
     app.invoke(:deps)
 
     s.invoke(:generate_secrets)
