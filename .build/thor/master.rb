@@ -38,6 +38,7 @@ class Master < Thor
     app.invoke(:precompile_assets)
 
     daemon.invoke(:install)
+    daemon.invoke(:start)
     daemon.invoke(:enable)
     docker.invoke(:daemon)
 
