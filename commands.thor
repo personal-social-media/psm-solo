@@ -7,5 +7,6 @@ require 'colorize'
 require 'fileutils'
 require "securerandom"
 require "yaml"
+require 'pathname'
 ENV["THOR_SILENCE_DEPRECATION"] = "TRUE"
 Dir["#{File.dirname(__FILE__)}/.build/thor/**/*.rb"].each { |file| require file }

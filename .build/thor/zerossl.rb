@@ -78,11 +78,11 @@ exit
 
   no_commands do
     def public_dir
-      "#{File.dirname(__FILE__)}/../../app/public"
+      Pathname.new("#{File.dirname(__FILE__)}/../../app/public").cleanpath
     end
 
     def keys_dir
-      "#{File.dirname(__FILE__)}/../keys"
+      Pathname.new("#{File.dirname(__FILE__)}/../keys").cleanpath
     end
   end
 end
