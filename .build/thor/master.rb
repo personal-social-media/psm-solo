@@ -1,13 +1,11 @@
 class Master < Thor
   include Thor::Actions
 
-  desc "setup", "install everything"
-  def setup
+  desc "setup1", "install step 1"
+  def setup1
     s = Setup.new
     repo = Repo.new
-    app = App.new
     docker = Docker.new
-    daemon = Daemon.new
     zero_ssl = Zerossl.new
 
     s.invoke(:ufw)
@@ -19,9 +17,19 @@ class Master < Thor
     s.invoke(:docker_compose)
     docker.invoke(:build)
     zero_ssl.invoke(:acme_check)
-    raise "ok"
-    app.invoke(:deps)
+  end
 
+  desc "setup2", "install step 2"
+  def setup2
+    zero_ssl = Zerossl.new
+    zero_ssl.invoke(:acme_check)
+  end
+
+  desc "setup3", "install step 3"
+  def setup3
+    s = Setup.new
+    app = App.new
+    daemon = Daemon.new
     s.invoke(:generate_secrets)
     app.invoke(:create_db)
     app.invoke(:precompile_assets)
