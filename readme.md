@@ -1,0 +1,3 @@
+- `thor master:setup1`
+- `thor master:setup2`
+- `thor master:setup3`
