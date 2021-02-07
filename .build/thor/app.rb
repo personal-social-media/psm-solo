@@ -25,4 +25,9 @@ class App < Thor
   def restart
     run "docker-compose restart --timeout 600 app sidekiq"
   end
+
+  desc "logs", "show logs"
+  def logs
+    print "print this to get the logs\ntail -f app/log/production.log\n"
+  end
 end

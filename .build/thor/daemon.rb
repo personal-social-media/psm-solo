@@ -37,6 +37,11 @@ echo '#{file_content}' | sudo tee /etc/systemd/system/#{service_name}.service
     run "bundle install"
   end
 
+  desc "logs", "get logs"
+  def logs
+    print "type this for logs:\n\nsudo journalctl -u #{service_name} -f"
+  end
+
   no_commands do
     def file_content
       <<-CONF
