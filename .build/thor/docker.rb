@@ -6,6 +6,11 @@ class Docker < Thor
     run 'docker stop $(docker ps -a -q)'
   end
 
+  desc "stop", "docker-compose stop"
+  def stop_all
+    run 'docker-compose stop'
+  end
+
   desc "app", "docker-compose run app bash"
   def app
     run "docker-compose run app bash"
@@ -14,6 +19,11 @@ class Docker < Thor
   desc "build", "docker-compose build"
   def build
     run "docker-compose build"
+  end
+
+  desc "restart", "docker-compose restart"
+  def restart
+    run "docker-compose restart"
   end
 
   desc "daemon", "starts docker-compose as daemon"

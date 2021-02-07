@@ -1,7 +1,6 @@
 class Update
   def run
     fetch_repo
-    docker.invoke(:build)
     update_app
     app.invoke(:restart)
   end
@@ -9,6 +8,10 @@ class Update
   def run_self
     daemon.invoke(:update_self)
     daemon.invoke(:restart)
+
+    docker.invoke(:build)
+    docker.invoke(:stop)
+    docker.invoke(:daemon)
   end
 
   private
