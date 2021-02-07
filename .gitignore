@@ -2,6 +2,7 @@
 !app/*
 .build/.db
 .build/keys
+.build/zerossl
 .build/.bundle-cache-dir
 .build/sockets
 .build/storage

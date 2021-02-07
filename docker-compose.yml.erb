@@ -1,4 +1,5 @@
-default_rails: &default_rails
+version: "3.4"
+x-default-rails: &default_rails
   build: "./.build/docker/app"
   links:
     - redis
@@ -22,28 +23,38 @@ default_rails: &default_rails
     - STORAGE=/storage
     - KEYS_LOCATION=/keys
 
-app:
-  <<: *default_rails
-  command: bundle exec puma -b unix:///sockets/puma.sock
+services:
+  app:
+    <<: *default_rails
+    restart: always
+    command: bundle exec puma -b unix:///sockets/puma.sock
 
-sidekiq:
-  <<: *default_rails
-  command: bundle exec sidekiq
+  sidekiq:
+    <<: *default_rails
+    restart: always
+    command: bundle exec sidekiq
 
-redis:
-  image: redis:alpine
+  redis:
+    image: redis:alpine
+    restart: always
 
-postgres:
-  image: postgres:12-alpine
-  volumes:
-    - .build/.db:/var/lib/postgresql/data
-  environment:
-    - POSTGRES_PASSWORD=1234
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    volumes:
+      - .build/.db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234
 
-nginx:
-  image: nginx:stable-alpine
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - .build/nginx/sites-enabled:/etc/nginx/sites-enabled
+  nginx:
+    build: "./.build/nginx"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .build/nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./app:/app
+      - .build/keys:/keys
+      - .build/sockets:/sockets
+      - .build/zerossl:/zerossl

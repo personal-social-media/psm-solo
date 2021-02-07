@@ -30,6 +30,7 @@ class Setup < Thor
     sample = File.read("docker-compose.yml.erb")
     erb = ERB.new(sample)
     @load_balancer_ip = ask("Type the server IP:\n").strip
+    @load_balancer_ip = "https://#{@load_balancer_ip}"
     @@load_balancer_ip = @load_balancer_ip
     @pg_password = SecureRandom.hex
     @login_token = SecureRandom.hex 32
