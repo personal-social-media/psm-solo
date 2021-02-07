@@ -1,7 +1,7 @@
 class FetchLatestCommit
   def new_update?
     p "checking for update #{Time.now.to_i}"
-    return false if fetch_latest_commit == existing
+    return false if existing == fetch_latest_commit
     File.open(commit_file, "w") do |f|
       f.write fetch_latest_commit
     end
