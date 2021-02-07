@@ -10,7 +10,7 @@ class Repo < Thor
   def update
     inside "./app" do
       run "git checkout Gemfile.lock"
-      run "git pull origin master"
+      run "git pull"
     end
   end
 end

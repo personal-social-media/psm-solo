@@ -33,7 +33,7 @@ echo '#{file_content}' | sudo tee /etc/systemd/system/#{service_name}.service
 
   desc "update_self", "updates itself"
   def update_self
-    run "git pull origin master"
+    run "git pull"
     run "bundle install"
   end
 
