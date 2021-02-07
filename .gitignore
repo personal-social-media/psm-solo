@@ -1,5 +1,4 @@
 .idea/
-!app/*
 .build/.db
 .build/keys
 .build/zerossl
@@ -8,3 +7,4 @@
 .build/storage
 docker-compose.yml
 .build/releases
+/app/

@@ -1,12 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.2)
     total (0.3.0)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  rspec-core
   total (~> 0.3.0)
 
 BUNDLED WITH
