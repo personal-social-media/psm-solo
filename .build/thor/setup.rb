@@ -2,7 +2,7 @@ class Setup < Thor
   include Thor::Actions
   desc "ufw", "enable ufw"
   def ufw
-    run "sudo apt-get install -y ufw"
+    run "sudo apt-get install -y ufw wget"
     run "sudo ufw allow 22"
     run "sudo ufw allow 80"
     run "sudo ufw allow 443"

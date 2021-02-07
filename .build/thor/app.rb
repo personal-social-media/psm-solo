@@ -30,4 +30,9 @@ class App < Thor
   def logs
     print "print this to get the logs\ntail -f app/log/production.log\n"
   end
+
+  desc "cities", "download cities"
+  def cities
+    run "docker-compose run app bundle exec rake psm:download_cities"
+  end
 end

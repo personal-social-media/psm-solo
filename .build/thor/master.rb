@@ -16,7 +16,6 @@ class Master < Thor
     repo.invoke(:clone)
     s.invoke(:docker_compose)
     docker.invoke(:build)
-    zero_ssl.invoke(:acme_check)
   end
 
   desc "setup2", "install step 2"
@@ -31,12 +30,16 @@ class Master < Thor
     s = Setup.new
     app = App.new
     daemon = Daemon.new
+    docker = Docker.new
+    app.invoke(:deps)
     s.invoke(:generate_secrets)
     app.invoke(:create_db)
+    app.invoke(:cities)
     app.invoke(:precompile_assets)
 
     daemon.invoke(:install)
     daemon.invoke(:enable)
+    docker.invoke(:daemon)
 
     s.login_url
   end
