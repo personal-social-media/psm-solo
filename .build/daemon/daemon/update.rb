@@ -2,6 +2,7 @@ class Update
   def run
     fetch_repo
     update_app
+    app.invoke(:restart)
   end
 
   def run_self
