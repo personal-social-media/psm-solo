@@ -6,9 +6,7 @@ Dir[File.join(__dir__, "/../thor/**/*.rb")].each { |file| require file }
 loop do
   if FetchLatestCommit.new.new_update?
     Update.new.run
-  end
-
-  if FetchLatestCommitSelf.new.new_update?
+  elsif FetchLatestCommitSelf.new.new_update?
     Update.new.run_self
   end
 
