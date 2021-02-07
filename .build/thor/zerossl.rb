@@ -69,11 +69,9 @@ exit
 
     inside "/tmp/ssl" do
       run "cat certificate.crt ca_bundle.crt >> certificate.crt"
-      run "cp mv certificate.crt #{keys_dir}/certificate.crt"
-      run "cp mv private.key #{keys_dir}/private.key"
+      run "mv certificate.crt #{keys_dir}/certificate.crt"
+      run "mv private.key #{keys_dir}/private.key"
     end
-
-    run "rm /tmp/keys.zip /tmp/ssl -rf"
   end
 
   no_commands do
