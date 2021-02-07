@@ -27,7 +27,14 @@ echo '#{file_content}' | sudo tee /etc/systemd/system/#{service_name}.service
 
   desc "restart", "restarts service"
   def restart
-    `sudo systemctl restart #{service_name}.service`
+    p "restarting self"
+    run "sudo systemctl restart #{service_name}.service"
+  end
+
+  desc "update_self", "updates itself"
+  def update_self
+    run "git pull origin master"
+    run "bundle install"
   end
 
   no_commands do
@@ -42,7 +49,7 @@ Type=simple
 User=#{ENV["USER"]}
 
 WorkingDirectory=#{Dir.pwd}
-ExecStart=#{bundle} install && #{ruby} .build/daemon/app.rb
+ExecStart=#{ruby} .build/daemon/app.rb
 Restart=always
 
 [Install]

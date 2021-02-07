@@ -5,7 +5,11 @@ Dir[File.join(__dir__, "/../thor/**/*.rb")].each { |file| require file }
 
 loop do
   if FetchLatestCommit.new.new_update?
-    p "ok"
+    Update.new.run
+  end
+
+  if FetchLatestCommitSelf.new.new_update?
+    Update.new.run_self
   end
 
   sleep rand(600..900)

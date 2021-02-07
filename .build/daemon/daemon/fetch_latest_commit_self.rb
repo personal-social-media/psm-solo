@@ -1,6 +1,6 @@
-class FetchLatestCommit
+class FetchLatestCommitSelf
   def new_update?
-    p "checking for update #{Time.now.to_i}"
+    p "checking for self update #{Time.now.to_i}"
     return false if existing == fetch_latest_commit
     File.open(commit_file, "w") do |f|
       f.write fetch_latest_commit
@@ -9,7 +9,7 @@ class FetchLatestCommit
   end
 
   def fetch_latest_commit
-    @fetch_latest_commit ||= `git ls-remote https://github.com/personal-social-media/personal-social-media.git  grep refs/heads/master | cut -f 1`
+    @fetch_latest_commit ||= `git ls-remote https://github.com/personal-social-media/psm-solo.git  grep refs/heads/master | cut -f 1`
   end
 
   def existing
@@ -18,6 +18,6 @@ class FetchLatestCommit
   end
 
   def commit_file
-    "#{File.dirname(__FILE__)}/../tmp/commit"
+    "#{File.dirname(__FILE__)}/../tmp/commit-self"
   end
 end

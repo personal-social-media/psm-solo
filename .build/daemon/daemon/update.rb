@@ -4,6 +4,11 @@ class Update
     update_app
   end
 
+  def run_self
+    daemon.invoke(:update_self)
+    daemon.invoke(:restart)
+  end
+
   def fetch_repo
     repo.invoke(:update)
   end
@@ -20,5 +25,9 @@ class Update
 
   def app
     @app ||= App.new
+  end
+
+  def daemon
+    @daemon ||= Daemon.new
   end
 end
