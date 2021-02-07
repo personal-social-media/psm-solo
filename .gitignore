@@ -3,6 +3,7 @@
 .build/zerossl
 .build/.bundle-cache-dir
 .build/sockets
+.build/thor/ssh.rb
 .build/storage
 docker-compose.yml
 .build/releases
