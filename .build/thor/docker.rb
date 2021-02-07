@@ -15,4 +15,9 @@ class Docker < Thor
   def build
     run "docker-compose build"
   end
+
+  desc "daemon", "starts docker-compose as daemon"
+  def daemon
+    run "docker-compose up -d"
+  end
 end
