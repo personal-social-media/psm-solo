@@ -7,6 +7,7 @@ class Master < Thor
     repo = Repo.new
     app = App.new
     docker = Docker.new
+    daemon = Daemon.new
 
     s.invoke(:ufw)
     s.invoke(:docker)
@@ -23,5 +24,8 @@ class Master < Thor
     app.invoke(:precompile_assets)
 
     s.login_url
+
+    daemon.install
+    daemon.enable
   end
 end

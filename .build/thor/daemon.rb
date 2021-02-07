@@ -65,10 +65,6 @@ Restart=always
       "personal-social-media-daemon"
     end
 
-    def bundle
-      `which bundle`.gsub("\n", "")
-    end
-
     def ruby
       `which ruby`.gsub("\n", "")
     end
