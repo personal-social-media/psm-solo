@@ -14,7 +14,7 @@ class Setup < Thor
     run "sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y"
     run "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
     run 'sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
-    run "sudo apt install docker-ce -y"
+    run "sudo apt install docker-ce unzip -y"
     run "sudo adduser $USER docker"
     run 'sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
     run "sudo chmod +x /usr/local/bin/docker-compose"

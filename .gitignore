@@ -1,6 +1,7 @@
 .idea/
 .build/.db
-.build/keys
+./.build/keys
+!/.build/keys/.keep
 .build/zerossl
 .build/.bundle-cache-dir
 .build/sockets

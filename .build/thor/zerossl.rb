@@ -38,7 +38,7 @@ Type END after the input
 Now open another terminal, cd into psm-solo and run:\n
     TXT
     print "docker-compose up nginx_acme\n".colorize(:green)
-    print "now you can verify the domain"
+    print "now you can verify the domain\n"
     ask("Press any key to continue to the next step")
   end
 
@@ -62,13 +62,12 @@ exit
       upload_ssl if ask("If ready to check?Types yes").match(/yes/i)
     end
 
-    run "sudo apt install -y unzip"
     run "mkdir -p /tmp/ssl"
-    inside "tmp" do
+    inside "/tmp" do
       run "unzip keys.zip -d ssl"
     end
 
-    inside "tmp/ssl" do
+    inside "/tmp/ssl" do
       run "cat certificate.crt ca_bundle.crt >> certificate.crt"
       run "cp mv certificate.crt #{keys_dir}/certificate.crt"
       run "cp mv private.key #{keys_dir}/private.key"
