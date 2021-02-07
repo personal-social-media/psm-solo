@@ -58,6 +58,7 @@ services:
       - ./app:/app
       - .build/keys:/keys
       - .build/sockets:/sockets
+      - .build/storage:/storage
 
   nginx_acme:
     build: "./.build/nginx"
@@ -66,4 +67,3 @@ services:
     volumes:
       - .build/nginx/sites-enabled-acme:/etc/nginx/sites-enabled
       - ./app:/app
-      - .build/storage:/storage
