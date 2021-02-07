@@ -9,6 +9,8 @@ class Update
     daemon.invoke(:restart)
   end
 
+  private
+
   def fetch_repo
     repo.invoke(:update)
   end
