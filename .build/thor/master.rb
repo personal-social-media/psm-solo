@@ -23,6 +23,7 @@ class Master < Thor
   def setup2
     zero_ssl = Zerossl.new
     zero_ssl.invoke(:acme_check)
+    zero_ssl.invoke(:upload_ssl)
   end
 
   desc "setup3", "install step 3"

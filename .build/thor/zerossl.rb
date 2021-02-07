@@ -12,7 +12,7 @@ copy paste the link like
     TXT
     url = nil
     until url&.match(/well-known/)
-      url = ask <<-TXT.colorize(:blue)
+      url = ask <<-TXT.colorize(:green)
 http://161.97.64.223/.well-known/pki-validation/A2D86497634737C68224ECE19F21F7DC.txt
       TXT
     end
@@ -33,41 +33,57 @@ Type END after the input
     File.open(path, "w") do |f|
       f.write(content)
     end
+
+    print <<-TXT.colorize(:yellow)
+Now open another terminal, cd into psm-solo and run:\n
+    TXT
+    print "docker-compose up nginx_acme\n".colorize(:green)
+    print "now you can verify the domain"
+    ask("Press any key to continue to the next step")
   end
 
-  desc "check_for_files", "checks zero ssl initial upload"
-  def check_for_files
+  desc "upload_ssl", "checks zero ssl initial upload"
+  def upload_ssl
     file = "/tmp/keys.zip"
 
     unless File.exist?(file)
       print <<-TXT.colorize(:red)
-Before starting, please sign up at 
-https://app.zerossl.com/certificate/new
-
-to get your ssl certificate for your server IP.
-after that please upload it to /tmp/keys.zip
-
+Now you need to upload the keys using SFTP to /tmp/keys.zip
 Change USER, IP to match your server config and run the commands below on your host(not server)
       TXT
 
-      print <<-TXT.colorize(:blue)
+      print <<-TXT.colorize(:green)
 sftp USER@IP
-put ~/Downloads/IP.zip /tmp/keys.zip
+put IP.zip /tmp/keys.zip
 
 exit
       TXT
 
-      check_for_files if ask("If ready to check?Types yes").match(/yes/)
-
-      print <<-TXT
-docker-compose up nginx_acme
-      TXT
+      upload_ssl if ask("If ready to check?Types yes").match(/yes/i)
     end
+
+    run "sudo apt install -y unzip"
+    run "mkdir -p /tmp/ssl"
+    inside "tmp" do
+      run "unzip keys.zip -d ssl"
+    end
+
+    inside "tmp/ssl" do
+      run "cat certificate.crt ca_bundle.crt >> certificate.crt"
+      run "cp mv certificate.crt #{keys_dir}/certificate.crt"
+      run "cp mv private.key #{keys_dir}/private.key"
+    end
+
+    run "rm /tmp/keys.zip /tmp/ssl -rf"
   end
 
   no_commands do
     def public_dir
       "#{File.dirname(__FILE__)}/../../app/public"
+    end
+
+    def keys_dir
+      "#{File.dirname(__FILE__)}/../keys"
     end
   end
 end
