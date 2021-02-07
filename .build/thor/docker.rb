@@ -18,6 +18,6 @@ class Docker < Thor
 
   desc "daemon", "starts docker-compose as daemon"
   def daemon
-    run "docker-compose up -d"
+    run "docker-compose up -d app sidekiq redis nginx postgres"
   end
 end

@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    colorize (0.8.1)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
@@ -10,6 +11,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  colorize
   rspec-core
   total (~> 0.3.0)
 

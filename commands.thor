@@ -3,6 +3,7 @@
 require 'total'
 require 'etc'
 require "erb"
+require 'colorize'
 require "securerandom"
 ENV["THOR_SILENCE_DEPRECATION"] = "TRUE"
 Dir["#{File.dirname(__FILE__)}/.build/thor/**/*.rb"].each { |file| require file }

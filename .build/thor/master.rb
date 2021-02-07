@@ -8,6 +8,7 @@ class Master < Thor
     app = App.new
     docker = Docker.new
     daemon = Daemon.new
+    zero_ssl = Zerossl.new
 
     s.invoke(:ufw)
     s.invoke(:docker)
@@ -17,6 +18,8 @@ class Master < Thor
     repo.invoke(:clone)
     s.invoke(:docker_compose)
     docker.invoke(:build)
+    zero_ssl.invoke(:acme_check)
+    raise "ok"
     app.invoke(:deps)
 
     s.invoke(:generate_secrets)
@@ -25,7 +28,7 @@ class Master < Thor
 
     s.login_url
 
-    daemon.install
-    daemon.enable
+    daemon.invoke(:install)
+    daemon.invoke(:enable)
   end
 end

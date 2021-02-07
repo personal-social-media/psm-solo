@@ -1,6 +1,7 @@
 class Update
   def run
     fetch_repo
+    docker.invoke(:build)
     update_app
     app.invoke(:restart)
   end
@@ -32,5 +33,9 @@ class Update
 
   def daemon
     @daemon ||= Daemon.new
+  end
+
+  def docker
+    @docker ||= Docker.new
   end
 end

@@ -20,6 +20,7 @@ x-default-rails: &default_rails
     - TIME_ZONE=UTC
     - DATABASE_URL=postgres://postgres:1234@postgres/psm
     - LOGIN_TOKEN=<%= @login_token %>
+    - ZEROSSL_EMAIL=<%= @zero_ssl_email %>
     - STORAGE=/storage
     - KEYS_LOCATION=/keys
 
@@ -57,4 +58,11 @@ services:
       - ./app:/app
       - .build/keys:/keys
       - .build/sockets:/sockets
-      - .build/zerossl:/zerossl
+
+  nginx_acme:
+    build: "./.build/nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - .build/nginx/sites-enabled-acme:/etc/nginx/sites-enabled
+      - ./app:/app
