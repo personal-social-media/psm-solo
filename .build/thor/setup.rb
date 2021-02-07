@@ -51,7 +51,10 @@ class Setup < Thor
 
   no_commands do
     def login_url
-      print "Setup done\nNow go to\n\n https://#{@@load_balancer_ip}/session/register?login_token=#{@@login_token}\n"
+      path = "#{File.dirname(__FILE__)}/../../docker-compose.yml"
+      docker_compose_yml = YAML.load_file(path)
+      env = docker_compose_yml.dig("services", "app", "environment")
+      print "Setup done\nNow go to\n\n #{env["LOAD_BALANCER_ADDRESS"]}/session/register?login_token=#{env["LOGIN_TOKEN"]}\n"
     end
   end
 end

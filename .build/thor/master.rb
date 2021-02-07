@@ -35,9 +35,9 @@ class Master < Thor
     app.invoke(:create_db)
     app.invoke(:precompile_assets)
 
-    s.login_url
-
     daemon.invoke(:install)
     daemon.invoke(:enable)
+
+    s.login_url
   end
 end
