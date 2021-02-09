@@ -15,6 +15,7 @@ class App < Thor
   desc "precompile-assets", "precompiles assets"
   def precompile_assets
     run "docker-compose run app rails assets:precompile"
+    run "docker-compose run app yarn autoclean --force"
   end
 
   desc "migrate-db", "migrates the db"
