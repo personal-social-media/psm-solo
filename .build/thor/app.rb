@@ -4,6 +4,7 @@ class App < Thor
   desc "deps", "install ruby gems and node modules"
   def deps
     run "docker-compose run app bundle install --jobs 4 --without development test"
+    run "docker-compose run app bundle clean --force"
   end
 
   desc "create-db", "creates the db"
