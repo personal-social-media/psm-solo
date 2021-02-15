@@ -10,6 +10,7 @@ x-default-rails: &default_rails
     - .build/sockets:/sockets
     - .build/keys:/keys
     - .build/storage:/storage
+    - /tmp:/tmp
   environment:
     - DOCKER=true
     - RUBYOPT=-W:no-deprecated -W:no-experimental
@@ -59,6 +60,7 @@ services:
       - .build/keys:/keys
       - .build/sockets:/sockets
       - .build/storage:/storage
+      - /tmp:/tmp
 
   nginx_acme:
     build: "./.build/nginx"
