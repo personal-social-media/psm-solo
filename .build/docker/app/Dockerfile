@@ -11,7 +11,8 @@ RUN apt-get update && \
   vim \
   bison \
   python-dev \
-  libvips libvips-dev libvips-tools
+  libvips libvips-dev libvips-tools \
+  libcurl4 libcurl3-gnutls libcurl4-openssl-dev
 
 RUN npm install -g yarn
 
