@@ -18,7 +18,7 @@ class Docker < Thor
 
   desc "build", "docker-compose build"
   def build
-    run "docker-compose build"
+    run "docker-compose build app nginx"
   end
 
   desc "restart", "docker-compose restart"
