@@ -10,11 +10,10 @@ RUN apt-get update && \
   libmagickwand-dev  \
   vim \
   bison \
-  python-dev \
-  libvips libvips-dev libvips-tools \
-  libcurl4 libcurl3-gnutls libcurl4-openssl-dev
+  python-dev
 
 RUN npm install -g yarn
+RUN apt-get install -y libvips libvips-dev libvips-tools libcurl4 libcurl3-gnutls libcurl4-openssl-dev ffmpeg
 
 RUN mkdir -p /app /sockets /keys
 WORKDIR /app
