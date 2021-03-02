@@ -7,11 +7,11 @@ class Update
 
   def run_self
     daemon.invoke(:update_self)
-    daemon.invoke(:restart)
 
     docker.invoke(:build)
     docker.invoke(:stop)
     docker.invoke(:daemon)
+    daemon.invoke(:restart)
   end
 
   private
