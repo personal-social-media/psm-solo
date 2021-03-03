@@ -11,6 +11,7 @@ class Update
     docker.invoke(:build)
     docker.invoke(:stop)
     docker.invoke(:daemon)
+
     daemon.invoke(:restart)
   end
 
